@@ -1,4 +1,4 @@
-dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
+re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
   # Validate distance method
   if (!(method %in% c("euclidean", "maximum", "manhattan",
                     "canberra", "binary", "minkowski"))) {
@@ -73,23 +73,23 @@ dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
 }
 
 # Test the function
-a <- c(2, 4, 4, 6)
-b <- c(5, 5, 7, 8)
-c <- c(9, 9, 9, 8)
-d <- c(1, 2, 3, 3)
+a <- c(1, 2, 3, 4)
+b <- c(6, 7, 6, 1)
+c <- c(1, 2, 2, 5)
+d <- c(8, 9, 0, 1)
 
 mat <- rbind(a, b, c, d)
 
 mat
 
-stats::dist(mat, method="canberra", upper=TRUE)
-dist(mat, method="canberra", upper=TRUE)
+stats::dist(mat, method="euclidean")
+re_dist(mat, method="euclidean")
 
 library(microbenchmark)
 library(ggplot2)
 bm_results <- microbenchmark(
   stats::dist(mat, method="euclidean"),
-  dist(mat, method="euclidean"),
+  re_dist(mat, method="euclidean"),
   times = 100
 )
 autoplot(bm_results)

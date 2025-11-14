@@ -1,0 +1,35 @@
+---
+title: "re_dist"
+author: "Andre Gala-Garza"
+date: "2025-11-14"
+output: rmarkdown::html_vignette
+description: >
+  This is a tutorial on how to use re_dist(), a reimplementation of the dist() function from base R.
+vignette: >
+  %\VignetteIndexEntry{dist}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This vignette shows the various usages for the re_dist() function and compares them to the original implementation of dist() in base R.
+
+```{r cars}
+a <- c(1, 2, 3, 4)
+b <- c(6, 7, 6, 1)
+c <- c(1, 2, 2, 5)
+d <- c(8, 9, 0, 1)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
