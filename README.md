@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/AndreGalaGarza/reDist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AndreGalaGarza/reDist/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
+
 # reDist
 ## Overview
 This package reimplements the base R function [dist()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/dist) as accurately as possible.
