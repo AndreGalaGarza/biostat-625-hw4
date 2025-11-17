@@ -27,7 +27,7 @@ library(reDist)
 compare_dist_calcs <- function(mat, method, diag = FALSE, upper = FALSE,
                                p = 2, display = FALSE) {
   dist_base <- stats::dist(mat, method, diag, upper, p)
-  dist_reDist <- re_dist(mat, method, diag, upper, p)
+  dist_reDist <- re_dist(mat, method, p)
   
   print(dist_base)
   print(dist_reDist)
@@ -114,22 +114,36 @@ re_dist(mat, method = "minkowski")
 compare_dist_calcs(mat, "minkowski", display = TRUE)
 ```
 
+```{r}
+re_dist(mat, method = "minkowski", p = 3)
+```
+
+```{r}
+compare_dist_calcs(mat, "minkowski", p = 3, display = TRUE)
+```
+
 ## Show diagonal of matrix
 ```{r}
 stats::dist(mat, method = "euclidean", diag = TRUE)
-re_dist(mat, method = "euclidean", diag = TRUE)
+
+dist_reDist <- re_dist(mat, method = "euclidean")
+print(dist_reDist, diag = TRUE)
 ```
 
 ## Show upper triangular part of matrix
 ```{r}
 stats::dist(mat, method = "euclidean", upper = TRUE)
-re_dist(mat, method = "euclidean", upper = TRUE)
+
+dist_reDist <- re_dist(mat, method = "euclidean")
+print(dist_reDist, upper = TRUE)
 ```
 
 ## Show entire matrix
 ```{r}
 stats::dist(mat, method = "euclidean", diag = TRUE, upper = TRUE)
-re_dist(mat, method = "euclidean", diag = TRUE, upper = TRUE)
+
+dist_reDist <-re_dist(mat, method = "euclidean")
+print(dist_reDist, diag = TRUE, upper = TRUE)
 ```
 
 ## Benchmark test

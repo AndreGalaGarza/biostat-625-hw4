@@ -1,15 +1,15 @@
 # reDist
 ## Overview
-This package reimplements the base R function [dist()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/dist).
+This package reimplements the base R function [dist()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/dist) as accurately as possible.
 
-When given a data matrix as input, ``re_dist()`` calculates the distance between each pair of rows in the input matrix using the specified distance metric. The result is stored as a special single-dimensional vector object that resembles a lower triangular matrix.
+When given a data matrix as input, ``re_dist()`` calculates the distance between each pair of rows in the input matrix using the specified distance metric. The result is stored as a ``dist`` object from base R, which is a special single-dimensional vector object that resembles a lower triangular matrix.
 
 ## Arguments
-- ``x`` - A numeric matrix, data frame, or ``dist`` object.
+- ``x`` - An object coercible to a numeric matrix, such as a matrix, data frame, or ``dist`` object. Any non-numerical columns in ``x`` will cause an error.
 - ``method`` - The distance measure to use for calculating the distance between rows. This must be one of the following: ``euclidean``, ``maximum``, ``manhattan``, ``canberra``, ``binary``, or ``minkowski``.
-- ``diag`` - Default value = FALSE. Set to TRUE to print the diagonal of the distance matrix.
-- ``upper`` - Default value = FALSE. Set to TRUE to print the upper triangular part of the distance matrix.
-- ``p`` - The power of the Minkowski distance. This is only relevant if the chosen ``method`` = ``minkowski``.
+- ``p`` - The power of the Minkowski distance. This is only relevant if the chosen ``method`` = ``minkowski``; otherwise, it is ignored.
+
+Note that the ``diag`` and ``upper`` parameters from ``dist()`` in base R can still be utilized with the output of ``re_dist()``, since both functions output a ``dist`` object. These parameters control whether to display the diagonal and upper triangular part of the matrix, respectively.
 
 ## Installation
 ```

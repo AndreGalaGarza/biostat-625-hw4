@@ -1,15 +1,27 @@
 #' Reimplementation of dist()
 #'
 #' @description
-#' This function reimplements the dist() function in base R
-#' as accurately as possible.
+#' This package reimplements the base R function dist() as accurately as possible.
+#'
+#' @param x An object coercible to a numeric matrix, such as a matrix, data frame, or \code{dist} object. Any non-numerical columns in x will cause an error.
+#'
+#' @param method The distance measure to use for calculating the distance between rows. This must be one of the following: \code{euclidean},  \code{maximum},  \code{manhattan},  \code{canberra},  \code{binary}, or  \code{minkowski}.
+#'
+#' @param p The power of the Minkowski distance. This argument is only relevant if the chosen \code{method} = \code{minkowski}; otherwise, it is ignored.
+#'
+#' @return
+#' A \code{dist} object in R, which is a special single-dimensional vector object that resembles a lower triangular matrix.
+#'
+#' @seealso
+#' [stats::dist()]
+#' <https://stat.ethz.ch/R-manual/R-patched/library/stats/html/dist.html>
 #'
 #' @export
-re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
+re_dist <- function(x, method, p = 2) {
   # Validate distance method
   if (!(method %in% c("euclidean", "maximum", "manhattan",
                     "canberra", "binary", "minkowski"))) {
-    stop("invalid distance_method")
+    stop("invalid distance method")
   }
 
   # Assign input matrix
@@ -17,15 +29,14 @@ re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
   if (!is.numeric(x)) {
     stop("x was not coerced to numeric")
   }
-
-  n <- nrow(x)
   row_names <- rownames(x)
 
   # Transpose for column-major operations
   x <- t(x)
 
   # Calculate distance
-  calc_dist <- function(x, method) {
+  calc_dist <- function(x, method, p) {
+    n <- nrow(x)
     dist_matrix <- matrix(0, nrow = n, ncol = n)
 
     # Compare all rows to each other
@@ -35,11 +46,7 @@ re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
         # Calculate distance between two rows
         a <- x[, i]
         b <- x[, j]
-        dist_row <- vector(mode = "numeric", length = length(a))
         if (method == "euclidean" || method == "minkowski") {
-          if (method == "euclidean") {
-            p <- 2
-          }
           dist_row <- abs(a - b)
           dist_row <- dist_row^p
           dist_row <- sum(dist_row)
@@ -53,11 +60,11 @@ re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
         } else if (method == "canberra") {
           dist_row <- abs(a - b) / (abs(a) + abs(b))
           dist_row <- sum(dist_row)
-        } else { # Binary distance
+        } else { # Binary (Jaccard) distance
           a1 <- which(a != 0)
           b1 <- which(b != 0)
           inter <- length(intersect(a1, b1))
-          uni   <- length (union(a1, b1))
+          uni   <- length(union(a1, b1))
           dist_row <- 1 - inter / uni
         }
 
@@ -67,14 +74,10 @@ re_dist <- function(x, method, diag = FALSE, upper = FALSE, p = 2) {
         dist_matrix[j, i] <- dist_row
       }
     }
-    return(dist_matrix)
+    dist_matrix
   }
 
-  dist_matrix <- calc_dist(x, method)
+  dist_matrix <- calc_dist(x, method, p)
   rownames(dist_matrix) <- row_names
-  dist_obj <- as.dist(dist_matrix)
-  if (!diag && !upper) {
-    return(dist_obj)
-  }
-  return(print(dist_obj, diag, upper))
+  as.dist(dist_matrix)
 }
