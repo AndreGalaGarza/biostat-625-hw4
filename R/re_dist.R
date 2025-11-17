@@ -17,6 +17,8 @@
 #' <https://stat.ethz.ch/R-manual/R-patched/library/stats/html/dist.html>
 #'
 #' @examples
+#' set.seed(123)
+#' mat <- matrix(rnorm(12), nrow = 4)
 #' re_dist(mat, method = "euclidean")
 #' re_dist(mat, method = "maximum")
 #' re_dist(mat, method = "minkowski", p = 3)
@@ -83,5 +85,5 @@ re_dist <- function(x, method = "euclidean", p = 2) {
 
   dist_matrix <- calc_dist(x, method, p)
   rownames(dist_matrix) <- row_names
-  as.dist(dist_matrix)
+  stats::as.dist(dist_matrix)
 }

@@ -20,6 +20,8 @@ A \code{dist} object in R, which is a special single-dimensional vector object t
 This package reimplements the base R function dist() as accurately as possible.
 }
 \examples{
+set.seed(123)
+mat <- matrix(rnorm(12), nrow = 4)
 re_dist(mat, method = "euclidean")
 re_dist(mat, method = "maximum")
 re_dist(mat, method = "minkowski", p = 3)

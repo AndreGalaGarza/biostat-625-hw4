@@ -4,13 +4,13 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Andre", "Gala-Garza", , "asgala@umich.edu", role = c("aut", "cre"))
 Description: This package reimplements the base R function dist() as accurately as possible. When given a data matrix as input, re_dist() calculates the distance between each pair of rows in the input matrix using the specified distance metric. The result is stored as a dist object from base R, which is a special single-dimensional vector object that resembles a lower triangular matrix.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
     covr,
+	ggplot2,
     knitr,
 	microbenchmark,
     rmarkdown,

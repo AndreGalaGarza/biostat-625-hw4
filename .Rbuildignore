@@ -3,3 +3,4 @@
 ^reDist\.Rproj$
 ^\.github$
 ^codecov\.yml$
+^LICENSE\.md$
