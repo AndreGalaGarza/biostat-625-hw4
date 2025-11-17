@@ -13,12 +13,21 @@ Note that the ``diag`` and ``upper`` parameters from ``dist()`` in base R can st
 
 ## Installation
 ```
-devtools::install.packages("AndreGalaGarza/reDist")
+library(devtools)
+
+devtools::install_github("AndreGalaGarza/reDist")
 ```
 
 ## Usage
 ```
 library(reDist)
+
+# Sample matrix
+a <- c(1, 2, 3, 4)
+b <- c(6, 7, 6, 1)
+c <- c(1, 2, 2, 5)
+d <- c(8, 9, 0, 1)
+mat <- rbind(a, b, c, d)
 
 re_dist(mat, method = "euclidean")
 ##           a         b         c
@@ -56,7 +65,7 @@ re_dist(mat, method = "minkowski")
 ## c  1.414214  9.055385          
 ## d 10.770330  6.633250 10.862780
 
-re_dist(mat, method = "euclidean", diag = TRUE, upper = TRUE)
+print(re_dist(mat, method = "euclidean"), diag = TRUE, upper = TRUE)
 ##           a         b         c         d
 ## a  0.000000  8.246211  1.414214 10.770330
 ## b  8.246211  0.000000  9.055385  6.633250

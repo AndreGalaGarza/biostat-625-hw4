@@ -21,13 +21,7 @@
 #' re_dist(mat, method = "maximum")
 #' re_dist(mat, method = "minkowski", p = 3)
 #' @export
-re_dist <- function(x, method, p = 2) {
-  # Validate distance method
-  if (!(method %in% c("euclidean", "maximum", "manhattan",
-                    "canberra", "binary", "minkowski"))) {
-    stop("invalid distance method")
-  }
-
+re_dist <- function(x, method = "euclidean", p = 2) {
   # Assign input matrix
   x <- as.matrix(x)
   if (!is.numeric(x)) {
@@ -35,12 +29,18 @@ re_dist <- function(x, method, p = 2) {
   }
   row_names <- rownames(x)
 
+  # Validate distance method
+  if (!(method %in% c("euclidean", "maximum", "manhattan",
+                    "canberra", "binary", "minkowski"))) {
+    stop("invalid distance method")
+  }
+
   # Transpose for column-major operations
   x <- t(x)
 
   # Calculate distance
   calc_dist <- function(x, method, p) {
-    n <- nrow(x)
+    n <- ncol(x)
     dist_matrix <- matrix(0, nrow = n, ncol = n)
 
     # Compare all rows to each other

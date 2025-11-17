@@ -144,7 +144,7 @@ print(dist_reDist, upper = TRUE)
 ```{r}
 stats::dist(mat, method = "euclidean", diag = TRUE, upper = TRUE)
 
-dist_reDist <-re_dist(mat, method = "euclidean")
+dist_reDist <- re_dist(mat, method = "euclidean")
 print(dist_reDist, diag = TRUE, upper = TRUE)
 ```
 
