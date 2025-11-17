@@ -13,7 +13,7 @@ Note that the ``diag`` and ``upper`` parameters from ``dist()`` in base R can st
 
 ## Installation
 ```
-install.packages("reDist")
+devtools::install.packages("AndreGalaGarza/reDist")
 ```
 
 ## Usage

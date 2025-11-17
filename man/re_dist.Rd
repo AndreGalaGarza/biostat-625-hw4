@@ -4,9 +4,27 @@
 \alias{re_dist}
 \title{Reimplementation of dist()}
 \usage{
-re_dist(x, method, diag = FALSE, upper = FALSE, p = 2)
+re_dist(x, method, p = 2)
+}
+\arguments{
+\item{x}{An object coercible to a numeric matrix, such as a matrix, data frame, or \code{dist} object. Any non-numerical columns in x will cause an error.}
+
+\item{method}{The distance measure to use for calculating the distance between rows. This must be one of the following: \code{euclidean},  \code{maximum},  \code{manhattan},  \code{canberra},  \code{binary}, or  \code{minkowski}.}
+
+\item{p}{The power of the Minkowski distance. This argument is only relevant if the chosen \code{method} = \code{minkowski}; otherwise, it is ignored.}
+}
+\value{
+A \code{dist} object in R, which is a special single-dimensional vector object that resembles a lower triangular matrix.
 }
 \description{
-This function reimplements the dist() function in base R
-as accurately as possible.
+This package reimplements the base R function dist() as accurately as possible.
+}
+\examples{
+re_dist(mat, method = "euclidean")
+re_dist(mat, method = "maximum")
+re_dist(mat, method = "minkowski", p = 3)
+}
+\seealso{
+\code{\link[stats:dist]{stats::dist()}}
+\url{https://stat.ethz.ch/R-manual/R-patched/library/stats/html/dist.html}
 }

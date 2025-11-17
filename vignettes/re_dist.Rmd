@@ -12,16 +12,30 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(reDist)
 ```
 
 This vignette shows the various usages for the re_dist() function and compares them to the original implementation of dist() in base R.
 
-## Setup
-
+## Overview
+re_dist() sets up a distance matrix that shows the distance between each pair of rows in a matrix. Here is a sample matrix that we will use to showcase re_dist():
 ```{r}
-library(reDist)
+a <- c(1, 2, 3, 4)
+b <- c(6, 7, 6, 1)
+c <- c(1, 2, 2, 5)
+d <- c(8, 9, 0, 1)
+
+mat <- rbind(a, b, c, d)
+
+mat
 ```
+
+We use this helper function to verify that the calculated distance matrices are identical:
 
 ```{r}
 compare_dist_calcs <- function(mat, method, diag = FALSE, upper = FALSE,
@@ -34,18 +48,6 @@ compare_dist_calcs <- function(mat, method, diag = FALSE, upper = FALSE,
   
   return(all.equal(as.matrix(dist_base), as.matrix(dist_reDist)))
 }
-```
-
-re_dist() sets up a distance matrix that shows the distance between each pair of rows in a matrix. Here is a sample matrix that we will use to showcase re_dist():
-```{r}
-a <- c(1, 2, 3, 4)
-b <- c(6, 7, 6, 1)
-c <- c(1, 2, 2, 5)
-d <- c(8, 9, 0, 1)
-
-mat <- rbind(a, b, c, d)
-
-mat
 ```
 
 ## Euclidean distance

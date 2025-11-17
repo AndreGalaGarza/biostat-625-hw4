@@ -16,6 +16,10 @@
 #' [stats::dist()]
 #' <https://stat.ethz.ch/R-manual/R-patched/library/stats/html/dist.html>
 #'
+#' @examples
+#' re_dist(mat, method = "euclidean")
+#' re_dist(mat, method = "maximum")
+#' re_dist(mat, method = "minkowski", p = 3)
 #' @export
 re_dist <- function(x, method, p = 2) {
   # Validate distance method
